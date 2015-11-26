@@ -1,0 +1,9 @@
+{
+	"name":"Pipe-Manager",
+	"author":"keyboardhack",
+	"version":"0.1.0",
+	"title":"Pipe Manager",
+	"homepage":"NaN",
+	"description":"pipe tools",
+	"dependencies": ["base >= 0.12.11"]
+}
