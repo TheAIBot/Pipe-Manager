@@ -23,8 +23,8 @@ function pipeCleaner.checkCrateNewCleanerJob(event)
 		
 		local entities = surface.find_entities({{pos.x - 0.2, pos.y - 0.2}, {pos.x + 0.2, pos.y + 0.2}})
 		for k, v in pairs(entities) do
-			if v.name == "pipe" or 
-			   v.name == "pipe-to-ground" then
+			if v.type == "pipe" or 
+			   v.type == "pipe-to-ground" then
 				global.jobs[#global.jobs + 1] = createCleanerJob(v)
 				break
 			end
