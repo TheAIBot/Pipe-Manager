@@ -14,11 +14,16 @@ end)
 
 script.on_event(defines.events.on_built_entity, 
 function(event)
-    pipeCleaner.checkCrateNewCleanerJob(event)
+    pipeCleaner.checkCreateNewCleanerJob(event)
+end)
+
+script.on_event(defines.events.on_robot_built_entity, 
+function(event)
+	pipeCleaner.checkCreateNewCleanerJob(event)
 end)
 
 script.on_event(defines.events.on_tick, 
-function()
+function(event)
 	pipeCleaner.doTick(event)
 end)
 

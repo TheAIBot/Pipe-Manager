@@ -1,3 +1,5 @@
+local tools = require("tools")
+
 -----------------
 --[[Constants]]--
 -----------------
@@ -12,13 +14,13 @@ local pipeCleaner = {}
 --------------
 --[[Events]]--
 --------------
-function pipeCleaner.checkCrateNewCleanerJob(event)
-	if event.created_entity.name == "pipe-cleaner" then
+function pipeCleaner.checkCreateNewCleanerJob(event)
+	if event.created_entity.name == "pipe-cleaner"  then
 		local playerStack = game.get_player(event.player_index).cursor_stack
 		local pos = event.created_entity.position
 		local surface = event.created_entity.surface
 		
-		reAddPipeCleaner(playerStack)
+		tools.reAddItemToPlayer(playerStack, "pipe-cleaner")
 		event.created_entity.destroy()
 		
 		local entities = surface.find_entities({{pos.x - 0.2, pos.y - 0.2}, {pos.x + 0.2, pos.y + 0.2}})
@@ -61,14 +63,6 @@ end
 ----------------------------
 --[[Create Job Functions]]--
 ----------------------------
-function reAddPipeCleaner(playerStack)
-	if not playerStack.valid_for_read then
-		playerStack.set_stack{name="pipe-cleaner", count=1}
-	elseif playerStack.name == "pipe-cleaner" then
-		playerStack.count = playerStack.count + 1
-	end
-end
-
 function createCleanerJob(pipe)
 	local newJob = 
 	{
@@ -192,24 +186,25 @@ end
 ------------------------
 function pipeCleaner.resetPipes()
 	for k,v in pairs(game.players) do
-		v.print("Resterting pipes")
+		v.print("Restarting pipes")
 		v.print("Please wait...")
 	end
 	for chunk in game.surfaces.nauvis.get_chunks() do
-		local top, left = chunk.x * 32, chunk.y * 32
-		local bottom, right = top + 32, left + 32
+		local chunkSize = 32
+		local top, left = chunk.x * chunkSize, chunk.y * chunkSize
+		local bottom, right = top + chunkSize, left + chunkSize
 		for _, ent in pairs(game.surfaces.nauvis.find_entities_filtered{area = {{top, left}, {bottom, right}}, name = DEBUG_ENTITY}) do
 			ent.destroy()
 		end
-		for _, ent in pairs(game.surfaces.nauvis.find_entities_filtered{area = {{top, left}, {bottom, right}}, name = "pipe"}) do
+		for _, ent in pairs(game.surfaces.nauvis.find_entities_filtered{area = {{top, left}, {bottom, right}}, type = "pipe"}) do
 			operationReactivatePipe(ent)
 		end
-		for _, ent in pairs(game.surfaces.nauvis.find_entities_filtered{area = {{top, left}, {bottom, right}}, name = "pipe-to-ground"}) do
+		for _, ent in pairs(game.surfaces.nauvis.find_entities_filtered{area = {{top, left}, {bottom, right}}, type = "pipe-to-ground"}) do
 			operationReactivatePipe(ent)
 		end
 	end
 	for k,v in pairs(game.players) do
-		v.print("al pipes restarted")
+		v.print("All pipes restarted")
 	end
 end
 
