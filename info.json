@@ -1,9 +1,9 @@
 {
 	"name":"Pipe-Manager",
 	"author":"keyboardhack",
-	"version":"0.1.0",
+	"version":"0.2.0",
 	"title":"Pipe Manager",
-	"homepage":"NaN",
+	"homepage":"http://www.factorioforums.com/forum/viewtopic.php?f=92&t=18039",
 	"description":"pipe tools",
 	"dependencies": ["base >= 0.12.11"]
 }
