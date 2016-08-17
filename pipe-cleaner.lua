@@ -16,20 +16,24 @@ local pipeCleaner = {}
 --------------
 function pipeCleaner.checkCreateNewCleanerJob(event)
 	if event.created_entity.name == "pipe-cleaner"  then
-		local playerStack = game.get_player(event.player_index).cursor_stack
-		local pos = event.created_entity.position
-		local surface = event.created_entity.surface
-		
-		tools.reAddItemToPlayer(playerStack, "pipe-cleaner")
-		event.created_entity.destroy()
-		
-		local entities = surface.find_entities({{pos.x - 0.2, pos.y - 0.2}, {pos.x + 0.2, pos.y + 0.2}})
-		for k, v in pairs(entities) do
-			if v.type == "pipe" or 
-			   v.type == "pipe-to-ground" then
-				global.jobs[#global.jobs + 1] = createCleanerJob(v)
-				break
+		if event.player_index ~= nil then	
+			local playerStack = game.players[event.player_index].cursor_stack
+			local pos = event.created_entity.position
+			local surface = event.created_entity.surface
+			
+			tools.reAddItemToPlayer(playerStack, "pipe-cleaner")
+			event.created_entity.destroy()
+			
+			local entities = surface.find_entities({{pos.x - 0.2, pos.y - 0.2}, {pos.x + 0.2, pos.y + 0.2}})
+			for k, v in pairs(entities) do
+				if v.type == "pipe" or 
+				   v.type == "pipe-to-ground" then
+					global.jobs[#global.jobs + 1] = createCleanerJob(v)
+					break
+				end
 			end
+		else
+			event.created_entity.destroy()
 		end
 	end
 end

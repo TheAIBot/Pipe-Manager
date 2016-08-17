@@ -5,5 +5,6 @@
 	"title":"Pipe Manager",
 	"homepage":"http://www.factorioforums.com/forum/viewtopic.php?f=92&t=18039",
 	"description":"pipe tools",
-	"dependencies": ["base >= 0.12.11"]
+	"dependencies": ["base >= 0.13.00"],
+	"factorio_version": "0.13"
 }

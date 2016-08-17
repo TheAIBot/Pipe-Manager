@@ -1,4 +1,3 @@
-require("defines")
 local pipeCleaner = require("pipe-cleaner")
 
 script.on_configuration_changed(
