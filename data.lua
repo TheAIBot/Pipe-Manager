@@ -4,18 +4,21 @@ data:extend(
         type = "item",
         name = "pipe-cleaner",
         icon = "__Pipe-Manager__/graphics/icons/pipe-cleaner.png",
+        icon_size = 32,
         flags = {"goes-to-quickbar"},
         damage_radius = 5,
         subgroup = "tool",
         order = "g[pipe-cleaner]",
         place_result = "pipe-cleaner",
         stack_size = 1
+
     },
 
     {
         type = "container",
         name = "pipe-cleaner",
         icon = "__Pipe-Manager__/graphics/icons/pipe-cleaner.png",
+        icon_size = 32,
         flags = {"placeable-player", "player-creation"},
         minable = {mining_time = 1, result = "pipe-cleaner"},
         max_health = 100,
@@ -47,6 +50,7 @@ data:extend(
         name = "debug_overlay",
         flags = {"placeable-neutral", "player-creation", "not-repairable"},
         icon = "__Pipe-Manager__/graphics/icons/pipe-cleaner.png",
+        icon_size = 32,
         max_health = 1,
         order = 'z[pipe-cleaner]',
         collision_mask = {"resource-layer"},
